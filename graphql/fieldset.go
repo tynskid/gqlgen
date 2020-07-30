@@ -32,9 +32,10 @@ func (m *FieldSet) Dispatch() {
 		// only one concurrent task, no need to spawn a goroutine or deal create waitgroups
 		d := m.delayed[0]
 		m.Values[d.i] = d.f()
+		fmt.Println('one')
 	} else if len(m.delayed) > 1 {
 		// more than one concurrent task, use the main goroutine to do one, only spawn goroutines for the others
-
+	fmt.Println('two')
 		var wg sync.WaitGroup
 		for _, d := range m.delayed[1:] {
 			wg.Add(1)
