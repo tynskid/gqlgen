@@ -2,8 +2,6 @@ package graphql
 
 import (
 	"io"
-	"fmt"
-	//"sync"
 )
 
 type FieldSet struct {
@@ -32,7 +30,6 @@ func (m *FieldSet) Dispatch() {
 		// only one concurrent task, no need to spawn a goroutine or deal create waitgroups
 		d := m.delayed[0]
 		m.Values[d.i] = d.f()
-		fmt.Println('one')
 
 }
 
