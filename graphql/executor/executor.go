@@ -2,7 +2,7 @@ package executor
 
 import (
 	"context"
-
+	"fmt"
 	"github.com/99designs/gqlgen/graphql"
 	"github.com/99designs/gqlgen/graphql/errcode"
 	"github.com/vektah/gqlparser/v2/ast"
@@ -108,9 +108,11 @@ func (e *Executor) DispatchOperation(ctx context.Context, rc *graphql.OperationC
 				}
 				resp.Errors = append(resp.Errors, graphql.GetErrors(ctx)...)
 				resp.Extensions = graphql.GetExtensions(ctx)
+				fmt.Println(resp)
 				return resp
 			})
 			if resp == nil {
+				fmt.Println("it returned nil")
 				return nil
 			}
 
