@@ -3,6 +3,7 @@ package graphql
 import (
 	"io"
 	"sync"
+	"fmt"
 )
 
 type FieldSet struct {
@@ -28,8 +29,14 @@ func (m *FieldSet) Concurrently(i int, f func() Marshaler) {
 }
 
 func (m *FieldSet) Dispatch() {
-	
-	
+	if len(m.delayed) == 1 {
+		fmt.Printf('first option')
+		// only one concurrent task, no need to spawn a goroutine or deal create waitgroups
+		d := m.delayed[0]
+		m.Values[d.i] = d.f()
+	} else if len(m.delayed) > 1 {
+		// more than one concurrent task, use the main goroutine to do one, only spawn goroutines for the others
+		fmt.Printf('second option')
 		var wg sync.WaitGroup
 		for _, d := range m.delayed[1:] {
 			wg.Add(1)
@@ -41,7 +48,7 @@ func (m *FieldSet) Dispatch() {
 
 		m.Values[m.delayed[0].i] = m.delayed[0].f()
 		wg.Wait()
-
+	}
 }
 
 func (m *FieldSet) MarshalGQL(writer io.Writer) {
