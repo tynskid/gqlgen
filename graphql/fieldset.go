@@ -2,6 +2,7 @@ package graphql
 
 import (
 	"io"
+	"sync"
 )
 
 type FieldSet struct {
