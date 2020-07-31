@@ -9,10 +9,10 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/99designs/gqlgen/api"
-	"github.com/99designs/gqlgen/codegen/config"
-	"github.com/99designs/gqlgen/internal/code"
-	"github.com/99designs/gqlgen/plugin/servergen"
+	"github.com/tynskid/gqlgen/api"
+	"github.com/tynskid/gqlgen/codegen/config"
+	"github.com/tynskid/gqlgen/internal/code"
+	"github.com/tynskid/gqlgen/plugin/servergen"
 	"github.com/urfave/cli/v2"
 )
 
